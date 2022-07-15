@@ -6,9 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { paoData } from '../myPao';
 
-export const PaoTable = () => {
+export const PaoTable = ({ paoData }) => {
 	const names = paoData.filter(({ person }) => person).length;
 	const completeEntries = paoData.filter(({ person, action, object }) => person && action && object).length;
 	return (
@@ -25,7 +24,7 @@ export const PaoTable = () => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{paoData.map(({ string, person, action, object }) => (
+						{paoData.map(({ string, person, action, object, description }) => (
 							<TableRow
 								key={string}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -36,6 +35,7 @@ export const PaoTable = () => {
 								<TableCell align="left">{person}</TableCell>
 								<TableCell align="left">{action}</TableCell>
 								<TableCell align="left">{object}</TableCell>
+								<TableCell align="left">{description}</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

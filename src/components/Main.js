@@ -6,6 +6,7 @@ import { ActionObjectTable } from './ActionObjectTable';
 import { initialState } from '../constants';
 import { saveResults } from '../tools';
 import { ViewButtons } from './ViewButtons';
+import { TrainingView } from './TrainingView';
 
 
 export const Main = () => {
@@ -26,6 +27,9 @@ export const Main = () => {
 			}
 			{view === 'actionObjectMapping' &&
 				<ActionObjectTable paoData={paoData} />
+			}
+			{view === 'training' &&
+				<TrainingView paoData={paoData} />
 			}
 		</div>
 	);

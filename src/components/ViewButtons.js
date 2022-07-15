@@ -1,6 +1,6 @@
 import { Button, ButtonGroup } from '@mui/material';
 
-export const ViewButtons = ({ dispatch }) => {
+export const ViewButtons = ({ dispatch, state }) => {
 	return (
 		<div>
 			<ButtonGroup variant="contained" aria-label="outlined primary button group">
@@ -9,7 +9,8 @@ export const ViewButtons = ({ dispatch }) => {
 				>
 					action object
 				</Button>
-				<Button onClick={() => dispatch({ type: 'setView', view: 'training' })}>training</Button>
+				<Button onClick={() => dispatch({ type: 'setView', view: 'trainingView' })}>training</Button>
+				<Button color="secondary" onClick={() => console.log('state', state)}>dumpState</Button>
 			</ButtonGroup>
 		</div>
 	);

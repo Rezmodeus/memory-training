@@ -1,22 +1,46 @@
 import { Button } from '@mui/material';
-import { Training1 } from './Training1';
 
-export const TrainingView = ({ paoData }) => {
+export const TrainingView = ({ paoData, dispatch }) => {
 
 	return (
 		<div>
 			<Button
-
+				onClick={() => dispatch({ type: 'randomizeOrder' })}
 			>
-				description
+				randomize order
 			</Button>
-			<Training1
-				paoData={paoData}
-				propName={'description'}
-				list={[0,1]}
-				okAction={() => console.log('ok')}
-				notOkAction={() => console.log('not ok')}
-			/>
+			<Button
+				onClick={() => dispatch({ type: 'sortOrder' })}
+			>
+				sort order
+			</Button>
+
+			<div>
+				<Button
+					onClick={() => dispatch({ type: 'startTraining1', propName: 'description' })}
+				>
+					description
+				</Button>
+				<Button
+					onClick={() => dispatch({ type: 'startTraining1', propName: 'description', notOkOnly: true })}
+				>
+					description notOk
+				</Button>
+
+			</div>
+			<div>
+				<Button
+					onClick={() => dispatch({ type: 'startTraining1', propName: 'person' })}
+				>
+					person
+				</Button>
+				<Button
+					onClick={() => dispatch({ type: 'startTraining1', propName: 'person', notOkOnly: true })}
+				>
+					person notOk
+				</Button>
+
+			</div>
 		</div>
 	);
 };

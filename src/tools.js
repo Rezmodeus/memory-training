@@ -1,3 +1,5 @@
+import { getNewResults } from './constants';
+
 const majorSystemMap = {
 	'0': 'P',
 	'1': 'T',
@@ -10,7 +12,7 @@ const majorSystemMap = {
 	'8': 'F/V',
 	'9': 'G'
 }
-const zeroPad = (num, places) => String(num).padStart(places, '0')
+export const zeroPad = (num, places) => String(num).padStart(places, '0')
 
 const generatePaoStrings = () => new Array(100)
 	.fill(0)
@@ -29,3 +31,31 @@ export const generatePaoData = (strings) => strings
 const paoStrings = generatePaoStrings()
 
 // console.log(generatePaoData(paoStrings));
+
+export const getIndexArray = (size = 100) => new Array(size).fill(0).map((_, index) => index);
+export const getBooleanArray = (size = 100) => new Array(size).fill(false).map(() => false);
+
+const keyExists = (key) => {
+	return !!localStorage.getItem(key);
+}
+const keyJsonOk = (key) => {
+	const data = localStorage.getItem(key);
+	let json
+	try {
+		json = JSON.parse(data);
+	} catch (error) {
+		json = null;
+	}
+	return json;
+}
+export const getResults = () => {
+	const key = 'results';
+	return keyExists(key) && keyJsonOk(key)
+		? JSON.parse(localStorage.getItem(key))
+		: getNewResults();
+};
+
+export const saveResults = (results) => {
+	const key = 'results';
+	localStorage.setItem(key, JSON.stringify(results));
+}

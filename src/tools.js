@@ -1,5 +1,3 @@
-import { getNewResults } from './constants';
-
 const majorSystemMap = {
 	'0': 'P',
 	'1': 'T',
@@ -34,6 +32,16 @@ const paoStrings = generatePaoStrings()
 
 export const getIndexArray = (size = 100) => new Array(size).fill(0).map((_, index) => index);
 export const getBooleanArray = (size = 100) => new Array(size).fill(false).map(() => false);
+
+
+
+export const getNewResults = () => ({
+	person: getBooleanArray(100),
+	action: getBooleanArray(100),
+	object: getBooleanArray(100),
+	description: getBooleanArray(100),
+});
+
 
 const keyExists = (key) => {
 	return !!localStorage.getItem(key);

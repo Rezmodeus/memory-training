@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 
 
-export const Training1 = ({ paoData, propName, currentList, isRandom, notOkOnly, dispatch, results }) => {
+export const TrainingNumbers = ({ paoData, propName, currentList, isRandom, notOkOnly, dispatch, results }) => {
 	const [showProp, setShowProp] = useState(false);
 	const list = notOkOnly
 		? currentList.filter(n => !results[propName][n])
@@ -13,12 +13,15 @@ export const Training1 = ({ paoData, propName, currentList, isRandom, notOkOnly,
 	const nbrStr = zeroPad(nbr, 2);
 
 	const okAction = () => {
+		setShowProp(false);
 		dispatch({ type: 'okAction', index: nbr })
 	}
 	const notOkAction = () => {
+		setShowProp(false);
 		dispatch({ type: 'notOkAction', index: nbr })
 	}
 	const skip = () => {
+		setShowProp(false);
 		dispatch({ type: 'skip' })
 	}
 

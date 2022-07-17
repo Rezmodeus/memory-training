@@ -17,12 +17,12 @@ export const TrainingView = ({ paoData, dispatch }) => {
 
 			<div>
 				<Button
-					onClick={() => dispatch({ type: 'startTraining1', propName: 'description' })}
+					onClick={() => dispatch({ type: 'startTrainingNumbers', propName: 'description' })}
 				>
 					description
 				</Button>
 				<Button
-					onClick={() => dispatch({ type: 'startTraining1', propName: 'description', notOkOnly: true })}
+					onClick={() => dispatch({ type: 'startTrainingNumbers', propName: 'description', notOkOnly: true })}
 				>
 					description notOk
 				</Button>
@@ -30,12 +30,12 @@ export const TrainingView = ({ paoData, dispatch }) => {
 			</div>
 			<div>
 				<Button
-					onClick={() => dispatch({ type: 'startTraining1', propName: 'person' })}
+					onClick={() => dispatch({ type: 'startTrainingNumbers', propName: 'person' })}
 				>
 					person
 				</Button>
 				<Button
-					onClick={() => dispatch({ type: 'startTraining1', propName: 'person', notOkOnly: true })}
+					onClick={() => dispatch({ type: 'startTrainingNumbers', propName: 'person', notOkOnly: true })}
 				>
 					person notOk
 				</Button>

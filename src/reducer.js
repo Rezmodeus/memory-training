@@ -15,10 +15,10 @@ const actions = {
 			currentList: state.currentList.sort((a, b) => a - b)
 		}
 	},
-	startTraining1: (state, { propName, notOkOnly = false }) => {
+	startTrainingNumbers: (state, { propName, notOkOnly = false }) => {
 		return {
 			...state,
-			view: 'training1',
+			view: 'trainingNumbers',
 			propName,
 			notOkOnly
 		}

@@ -7,7 +7,7 @@ import { initialState } from '../constants';
 import { saveResults } from '../tools';
 import { ViewButtons } from './ViewButtons';
 import { TrainingView } from './TrainingView';
-import { Training1 } from './Training1';
+import { TrainingNumbers } from './TrainingNumbers';
 
 
 export const Main = () => {
@@ -32,8 +32,8 @@ export const Main = () => {
 			{view === 'trainingView' &&
 				<TrainingView paoData={paoData} dispatch={dispatch} />
 			}
-			{view === 'training1' &&
-				<Training1
+			{view === 'trainingNumbers' &&
+				<TrainingNumbers
 					results={results}
 					paoData={paoData}
 					propName={propName}

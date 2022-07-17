@@ -12,7 +12,14 @@ import { TrainingNumbers } from './TrainingNumbers';
 
 export const Main = () => {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const { results, propName, currentList, notOkOnly } = state;
+	const {
+		results,
+		propName,
+		currentList,
+		notOkOnly,
+		currentMin,
+		currentMax
+	} = state;
 
 	useEffect(() => {
 		saveResults(results);
@@ -40,6 +47,8 @@ export const Main = () => {
 					currentList={currentList}
 					dispatch={dispatch}
 					notOkOnly={notOkOnly}
+					currentMin={currentMin}
+					currentMax={currentMax}
 				/>
 			}
 		</div>

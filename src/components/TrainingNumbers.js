@@ -3,11 +3,21 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 
 
-export const TrainingNumbers = ({ paoData, propName, currentList, isRandom, notOkOnly, dispatch, results }) => {
+export const TrainingNumbers = (props) => {
+	const {
+		paoData,
+		propName,
+		currentList,
+		notOkOnly,
+		dispatch,
+		results,
+		currentMin = 0,
+		currentMax = 100,
+	} = props;
 	const [showProp, setShowProp] = useState(false);
 	const list = notOkOnly
-		? currentList.filter(n => !results[propName][n])
-		: currentList;
+		? currentList.slice(currentMin, currentMax).filter(n => !results[propName][n])
+		: currentList.slice(currentMin, currentMax);
 
 	const nbr = list[0];
 	const nbrStr = zeroPad(nbr, 2);
@@ -36,7 +46,7 @@ export const TrainingNumbers = ({ paoData, propName, currentList, isRandom, notO
 			{showProp &&
 				<h3>{paoData[nbr][propName]}</h3>
 			}
-			<div>{list.length}</div>
+			<div>{list.filter(n => !results[propName][n]).length}</div>
 			<Button onClick={skip} color="success">skip</Button>
 
 		</div>

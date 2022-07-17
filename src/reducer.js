@@ -15,12 +15,14 @@ const actions = {
 			currentList: state.currentList.sort((a, b) => a - b)
 		}
 	},
-	startTrainingNumbers: (state, { propName, notOkOnly = false }) => {
+	startTrainingNumbers: (state, { propName, notOkOnly = false, currentMin = 0, currentMax = 100 }) => {
 		return {
 			...state,
 			view: 'trainingNumbers',
 			propName,
-			notOkOnly
+			notOkOnly,
+			currentMin,
+			currentMax
 		}
 	},
 	okAction: (state, { index }) => {

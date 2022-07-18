@@ -31,17 +31,24 @@ const paoStrings = generatePaoStrings()
 // console.log(generatePaoData(paoStrings));
 
 export const getIndexArray = (size = 100) => new Array(size).fill(0).map((_, index) => index);
+export const getRangeArray = (min, max) => new Array(max - min).fill(0).map((_, index) => index + min);
+export const getRandomRangeArray = (min, max) => new Array(max - min)
+	.fill(0)
+	.map((_, index) => index + min)
+	.sort(() => .5 - Math.random());
+
 export const getBooleanArray = (size = 100) => new Array(size).fill(false).map(() => false);
-
-
+const getResultArray = (size = 100) => new Array(size).fill(null).map(() => ({
+	ok: 0,
+	notOk: 0
+}));
 
 export const getNewResults = () => ({
-	person: getBooleanArray(100),
-	action: getBooleanArray(100),
-	object: getBooleanArray(100),
-	description: getBooleanArray(100),
+	person: getResultArray(100),
+	action: getResultArray(100),
+	object: getResultArray(100),
+	description: getResultArray(100),
 });
-
 
 const keyExists = (key) => {
 	return !!localStorage.getItem(key);

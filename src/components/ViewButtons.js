@@ -1,6 +1,9 @@
 import { Button, ButtonGroup } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const ViewButtons = ({ dispatch, state }) => {
+export const ViewButtons = () => {
+	const dispatch = useDispatch();
+	const state = useSelector(state => state);
 	return (
 		<div>
 			<ButtonGroup variant="contained" aria-label="outlined primary button group">

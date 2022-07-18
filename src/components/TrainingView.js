@@ -1,81 +1,46 @@
 import { Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
-export const TrainingView = ({ paoData, dispatch }) => {
+export const TrainingView = ({ paoData }) => {
+	const dispatch = useDispatch();
+	const ranges = [0, 20, 40, 60, 80]
 
 	return (
 		<div>
-			<Button onClick={() => dispatch({ type: 'randomizeOrder' })}>
-				randomize order
-			</Button>
-			<Button onClick={() => dispatch({ type: 'sortOrder' })}>
-				sort order
-			</Button>
-
-			<div>
-				<Button onClick={() => dispatch({
+			<h3>Person</h3>
+			<h4>Ordered</h4>
+			{ranges.map(start => (
+				<Button key={'ordered' + start} onClick={() => dispatch({
 					type: 'startTrainingNumbers',
-					propName: 'description'
-				})}> description </Button>
-
-				<Button onClick={() => dispatch({
-					type: 'startTrainingNumbers',
-					propName: 'description',
-					notOkOnly: true
-				})}> description notOk </Button>
-
-			</div>
-			<div>
-				<h3>Person</h3>
-				<Button onClick={() => dispatch({
-					type: 'startTrainingNumbers',
-					propName: 'person'
-				})}> person </Button>
-
-				<Button onClick={() => dispatch({
-					type: 'startTrainingNumbers',
+					view: 'trainingNumbers',
 					propName: 'person',
-					notOkOnly: true
-				})}> person notOk </Button>
-			</div>
-			<div>
-				<Button onClick={() => dispatch({
+					min: start,
+					max: start + 20,
+					isRandom: false
+				})}>{start}-{start + 19}</Button>
+			))}
+			<h4>Random</h4>
+			{ranges.map(start => (
+				<Button key={'random' + start} onClick={() => dispatch({
 					type: 'startTrainingNumbers',
+					view: 'trainingNumbers',
 					propName: 'person',
-					currentMin: 0,
-					currentMax:20
-				})}>0-19</Button>
-
-				<Button onClick={() => dispatch({
+					min: start,
+					max: start + 20,
+					isRandom: true
+				})}>{start}-{start + 19}</Button>
+			))}
+			<h4>New ones</h4>
+			{ranges.map(start => (
+				<Button key={'ordered' + start} onClick={() => dispatch({
 					type: 'startTrainingNumbers',
+					view: 'trainingNewOnes',
 					propName: 'person',
-					currentMin: 20,
-					currentMax:40
-				})}>20-39</Button>
-
-				<Button onClick={() => dispatch({
-					type: 'startTrainingNumbers',
-					propName: 'person',
-					currentMin: 40,
-					currentMax:60
-				})}>40-59</Button>
-
-				<Button onClick={() => dispatch({
-					type: 'startTrainingNumbers',
-					propName: 'person',
-					currentMin: 60,
-					currentMax: 80
-				})}>60-79</Button>
-
-				<Button onClick={() => dispatch({
-					type: 'startTrainingNumbers',
-					propName: 'person',
-					currentMin: 80,
-					currentMax: 100
-				})}>80-99</Button>
-
-
-			</div>
+					min: start,
+					max: start + 20,
+					isRandom: false
+				})}>{start}-{start + 19}</Button>
+			))}
 		</div>
 	);
-};
-
+}

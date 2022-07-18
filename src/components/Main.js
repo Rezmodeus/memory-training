@@ -1,35 +1,18 @@
 import { PaoTable } from './PaoTable';
-import { useEffect, useReducer } from 'react';
-import { reducer } from '../reducer';
 import { paoData } from '../myPao';
 import { ActionObjectTable } from './ActionObjectTable';
-import { initialState } from '../constants';
-import { saveResults } from '../tools';
 import { ViewButtons } from './ViewButtons';
 import { TrainingView } from './TrainingView';
-import { TrainingNumbers } from './TrainingNumbers';
+import { useSelector } from 'react-redux';
+import { TrainingRange, TrainingRangeNewOnes } from './TrainingRange';
 
 
 export const Main = () => {
-	const [state, dispatch] = useReducer(reducer, initialState)
-	const {
-		results,
-		propName,
-		currentList,
-		notOkOnly,
-		currentMin,
-		currentMax
-	} = state;
+	const view = useSelector(state => state.view);
 
-	useEffect(() => {
-		saveResults(results);
-	}, [results])
-
-
-	const { view } = state;
 	return (
 		<div>
-			<ViewButtons dispatch={dispatch} state={state} />
+			<ViewButtons />
 			{view === 'paoTable' &&
 				<PaoTable paoData={paoData} />
 			}
@@ -37,19 +20,13 @@ export const Main = () => {
 				<ActionObjectTable paoData={paoData} />
 			}
 			{view === 'trainingView' &&
-				<TrainingView paoData={paoData} dispatch={dispatch} />
+				<TrainingView paoData={paoData} />
 			}
 			{view === 'trainingNumbers' &&
-				<TrainingNumbers
-					results={results}
-					paoData={paoData}
-					propName={propName}
-					currentList={currentList}
-					dispatch={dispatch}
-					notOkOnly={notOkOnly}
-					currentMin={currentMin}
-					currentMax={currentMax}
-				/>
+				<TrainingRange paoData={paoData} />
+			}
+			{view === 'trainingNewOnes' &&
+				<TrainingRangeNewOnes paoData={paoData} />
 			}
 		</div>
 	);

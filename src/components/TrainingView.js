@@ -41,6 +41,17 @@ export const TrainingView = ({ paoData }) => {
 					isRandom: false
 				})}>{start}-{start + 19}</Button>
 			))}
+			<h4>Hard ones</h4>
+			{ranges.map(start => (
+				<Button key={'ordered' + start} onClick={() => dispatch({
+					type: 'startTrainingNumbers',
+					view: 'trainingHardOnes',
+					propName: 'person',
+					min: start,
+					max: start + 20,
+					isRandom: false
+				})}>{start}-{start + 19}</Button>
+			))}
 		</div>
 	);
 }

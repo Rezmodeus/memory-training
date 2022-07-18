@@ -6,6 +6,7 @@ import { updateResult } from '../reducer';
 
 
 export const TrainingRange = ({ paoData }) => {
+	const dispatch = useDispatch();
 	const min = useSelector(state => state.min);
 	const max = useSelector(state => state.max);
 	const isRandom = useSelector(state => state.isRandom);
@@ -15,15 +16,20 @@ export const TrainingRange = ({ paoData }) => {
 		? getRandomRangeArray(min, max)
 		: getRangeArray(min, max));
 	return (
-		<TrainingRangeElement
-			range={range}
-			propName={propName}
-			paoData={paoData}
-		/>
+		<>
+			<TrainingRangeElement
+				range={range}
+				propName={propName}
+				paoData={paoData}
+			/>
+			<br />
+			<Button onClick={() => dispatch({ type: 'setView', view: 'trainingView' })} variant="outlined">back</Button>
+		</>
 	)
 };
 
 export const TrainingRangeNewOnes = ({ paoData }) => {
+	const dispatch = useDispatch();
 	const min = useSelector(state => state.min);
 	const max = useSelector(state => state.max);
 	const isRandom = useSelector(state => state.isRandom);
@@ -49,10 +55,47 @@ export const TrainingRangeNewOnes = ({ paoData }) => {
 				/>)
 				: <div>no new ones in this range</div>
 			}
+			<br />
+			<Button onClick={() => dispatch({ type: 'setView', view: 'trainingView' })} variant="outlined">back</Button>
 		</>
 	)
 };
 
+export const TrainingRangeHardOnes = ({ paoData }) => {
+	const dispatch = useDispatch();
+	const min = useSelector(state => state.min);
+	const max = useSelector(state => state.max);
+	const isRandom = useSelector(state => state.isRandom);
+	const propName = useSelector(state => state.propName);
+
+	const newOnes = useSelector(state => state.results.person
+		.map((item, index) => ({ ...item, index }))
+		.filter(({ index }) => index >= min && index < max)
+		.filter(({ ok, notOk }) => notOk > 0 && notOk > ok))
+		.filter(({ ok, notOk }) => {
+			return notOk >= 2;
+		})
+		.map(({ index }) => index);
+
+	const [range, setRange] = useState(isRandom
+		? newOnes.sort(() => .5 - Math.random())
+		: newOnes
+	);
+	return (
+		<>
+			{range.length > 0
+				? (<TrainingRangeElement
+					range={range}
+					propName={propName}
+					paoData={paoData}
+				/>)
+				: <div>no hard ones in this range</div>
+			}
+			<br />
+			<Button onClick={() => dispatch({ type: 'setView', view: 'trainingView' })} variant="outlined">back</Button>
+		</>
+	)
+};
 
 const TrainingRangeElement = ({ paoData, range, propName }) => {
 	const dispatch = useDispatch();
@@ -80,6 +123,7 @@ const TrainingRangeElement = ({ paoData, range, propName }) => {
 	const { ok, notOk } = resultsArray[currentNumber];
 	return (
 		<div>
+			<div>{pos}/{range.length - 1}</div>
 			<div>ok:{ok} notOk:{notOk} total:{ok + notOk}</div>
 			<h1>{zeroPad(currentNumber, 2)}</h1>
 			<Button onClick={() => setShowAnswer(n => !n)}> {showAnswer ? 'hide answer' : 'show answer'} </Button>
@@ -91,7 +135,6 @@ const TrainingRangeElement = ({ paoData, range, propName }) => {
 				</>
 			}
 			<Button disabled={pos >= range.length} onClick={skip} color="success">skip</Button>
-			<Button onClick={() => dispatch({ type: 'setView', view: 'trainingView' })} variant="outlined">back</Button>
 		</div>
 	);
 };

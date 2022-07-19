@@ -28,22 +28,22 @@ export const TrainingRange = ({ paoData }) => {
 	)
 };
 
-export const TrainingRangeNewOnes = ({ paoData }) => {
+export const TrainingRangeNeutralOnes = ({ paoData }) => {
 	const dispatch = useDispatch();
 	const min = useSelector(state => state.min);
 	const max = useSelector(state => state.max);
 	const isRandom = useSelector(state => state.isRandom);
 	const propName = useSelector(state => state.propName);
 
-	const newOnes = useSelector(state => state.results.person
+	const items = useSelector(state => state.results.person
 		.map((item, index) => ({ ...item, index }))
 		.filter(({ index }) => index >= min && index < max)
-		.filter(({ ok, notOk }) => ok === 0 && notOk === 0))
+		.filter(({ ok, notOk }) => ok === notOk))
 		.map(({ index }) => index);
 
 	const [range, setRange] = useState(isRandom
-		? newOnes.sort(() => .5 - Math.random())
-		: newOnes
+		? items.sort(() => .5 - Math.random())
+		: items
 	);
 	return (
 		<>
@@ -68,18 +68,15 @@ export const TrainingRangeHardOnes = ({ paoData }) => {
 	const isRandom = useSelector(state => state.isRandom);
 	const propName = useSelector(state => state.propName);
 
-	const newOnes = useSelector(state => state.results.person
+	const items = useSelector(state => state.results.person
 		.map((item, index) => ({ ...item, index }))
 		.filter(({ index }) => index >= min && index < max)
-		.filter(({ ok, notOk }) => notOk > 0 && notOk > ok))
-		.filter(({ ok, notOk }) => {
-			return notOk >= 2;
-		})
+		.filter(({ ok, notOk }) => notOk > 0 && (notOk - ok) >= 1))
 		.map(({ index }) => index);
 
 	const [range, setRange] = useState(isRandom
-		? newOnes.sort(() => .5 - Math.random())
-		: newOnes
+		? items.sort(() => .5 - Math.random())
+		: items
 	);
 	return (
 		<>
@@ -105,19 +102,28 @@ const TrainingRangeElement = ({ paoData, range, propName }) => {
 
 	const currentNumber = range[pos]
 
+	const incOrGoBack = () => {
+		if (pos === range.length - 1) {
+			dispatch({ type: 'setView', view: 'trainingView' });
+		} else {
+			setPos(n => Math.min(n + 1, range.length - 1));
+		}
+
+	}
+
 	const okAction = () => {
 		dispatch(updateResult(propName, currentNumber, true));
 		setShowAnswer(false);
-		setPos(n => Math.min(n + 1, range.length - 1));
+		incOrGoBack();
 	};
 	const notOkAction = () => {
 		dispatch(updateResult(propName, currentNumber, false));
 		setShowAnswer(false);
-		setPos(n => Math.min(n + 1, range.length - 1));
+		incOrGoBack();
 	}
 	const skip = () => {
 		setShowAnswer(false);
-		setPos(n => Math.min(n + 1, range.length - 1));
+		incOrGoBack();
 	}
 
 	const { ok, notOk } = resultsArray[currentNumber];

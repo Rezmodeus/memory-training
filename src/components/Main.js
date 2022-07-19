@@ -4,7 +4,7 @@ import { ActionObjectTable } from './ActionObjectTable';
 import { ViewButtons } from './ViewButtons';
 import { TrainingView } from './TrainingView';
 import { useSelector } from 'react-redux';
-import { TrainingRange, TrainingRangeHardOnes, TrainingRangeNewOnes } from './TrainingRange';
+import { TrainingRange, TrainingRangeHardOnes, TrainingRangeNeutralOnes } from './TrainingRange';
 
 
 export const Main = () => {
@@ -25,8 +25,8 @@ export const Main = () => {
 			{view === 'trainingNumbers' &&
 				<TrainingRange paoData={paoData} />
 			}
-			{view === 'trainingNewOnes' &&
-				<TrainingRangeNewOnes paoData={paoData} />
+			{view === 'trainingNeutralOnes' &&
+				<TrainingRangeNeutralOnes paoData={paoData} />
 			}
 			{view === 'trainingHardOnes' &&
 				<TrainingRangeHardOnes paoData={paoData} />

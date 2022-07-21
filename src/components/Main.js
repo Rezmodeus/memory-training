@@ -5,6 +5,7 @@ import { ViewButtons } from './ViewButtons';
 import { TrainingView } from './TrainingView';
 import { useSelector } from 'react-redux';
 import { TrainingRange, TrainingRangeHardOnes, TrainingRangeNeutralOnes } from './TrainingRange';
+import { Stats } from './Stats';
 
 
 export const Main = () => {
@@ -21,6 +22,9 @@ export const Main = () => {
 			}
 			{view === 'trainingView' &&
 				<TrainingView paoData={paoData} />
+			}
+			{view === 'stats' &&
+				<Stats paoData={paoData} />
 			}
 			{view === 'trainingNumbers' &&
 				<TrainingRange paoData={paoData} />

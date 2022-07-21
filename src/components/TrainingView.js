@@ -10,7 +10,7 @@ export const TrainingView = ({ paoData }) => {
 			<h3>Person</h3>
 			<h4>Ordered</h4>
 			{ranges.map(([start, end]) => (
-				<Button key={'ordered' + start} onClick={() => dispatch({
+				<Button key={`ordered${start}${end}`} onClick={() => dispatch({
 					type: 'startTrainingNumbers',
 					view: 'trainingNumbers',
 					propName: 'person',
@@ -21,7 +21,7 @@ export const TrainingView = ({ paoData }) => {
 			))}
 			<h4>Random</h4>
 			{ranges.map(([start, end]) => (
-				<Button key={'ordered' + start} onClick={() => dispatch({
+				<Button key={`ordered${start}${end}`} onClick={() => dispatch({
 					type: 'startTrainingNumbers',
 					view: 'trainingNumbers',
 					propName: 'person',
@@ -32,24 +32,24 @@ export const TrainingView = ({ paoData }) => {
 			))}
 			<h4>Neutral ones</h4>
 			{ranges.map(([start, end]) => (
-				<Button key={'ordered' + start} onClick={() => dispatch({
+				<Button key={`neutral${start}${end}`} onClick={() => dispatch({
 					type: 'startTrainingNumbers',
 					view: 'trainingNeutralOnes',
 					propName: 'person',
 					min: start,
 					max: end,
-					isRandom: false
+					isRandom: true
 				})}>{start}-{end - 1}</Button>
 			))}
 			<h4>Hard ones</h4>
 			{ranges.map(([start, end]) => (
-				<Button key={'ordered' + start} onClick={() => dispatch({
+				<Button key={`hard${start}${end}`} onClick={() => dispatch({
 					type: 'startTrainingNumbers',
 					view: 'trainingHardOnes',
 					propName: 'person',
 					min: start,
 					max: end,
-					isRandom: false
+					isRandom: true
 				})}>{start}-{end - 1}</Button>
 			))}
 		</div>

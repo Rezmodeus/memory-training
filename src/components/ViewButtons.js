@@ -13,6 +13,7 @@ export const ViewButtons = () => {
 					action object
 				</Button>
 				<Button onClick={() => dispatch({ type: 'setView', view: 'trainingView' })}>training</Button>
+				<Button onClick={() => dispatch({ type: 'setView', view: 'stats' })}>stats</Button>
 				<Button color="secondary" onClick={() => console.log('state', state)}>dumpState</Button>
 			</ButtonGroup>
 		</div>

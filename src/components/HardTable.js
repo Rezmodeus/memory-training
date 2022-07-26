@@ -16,6 +16,7 @@ export const HardTable = ({ paoData }) => {
 			const { ok, notOk } = resultsPerson[index];
 			return ok === 0 && notOk > 1;
 		})
+		.sort((a, b) => b.notOk - a.notOk);
 
 	return (
 		<div className="stats-table">
@@ -29,7 +30,7 @@ export const HardTable = ({ paoData }) => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{names.map(({ person }, index) => (
+						{names.map(({ person ,index}) => (
 							<TableRow
 								key={person}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

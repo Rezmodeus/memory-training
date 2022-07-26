@@ -29,7 +29,7 @@ export const KnownTable = ({ paoData }) => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{names.map(({ person }, index) => (
+						{names.map(({ person, index }) => (
 							<TableRow
 								key={person}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

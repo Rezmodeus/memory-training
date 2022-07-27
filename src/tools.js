@@ -1,3 +1,45 @@
+// import { paoData } from './myPao';
+
+
+const getStringAsArray = (s) => s.split('').map(c => c.charCodeAt(0));
+const applyCrypt = (s, masterKey) => getStringAsArray(s).map(n => n ^ masterKey);
+const getDecryptedString = (arr, masterKey) => String.fromCharCode(...arr.map(n => n ^ masterKey));
+
+const encrypt = (dataArr, masterKey) => {
+	const keys = Object.keys(dataArr[0]);
+	return dataArr.map(item => {
+		return keys.reduce((obj, key) => {
+			return {
+				...obj,
+				[key]: applyCrypt(item[key], masterKey)
+			}
+		}, {})
+	});
+}
+
+const deCrypt = (dataArr, masterKey) => {
+	const keys = Object.keys(dataArr[0]);
+	return dataArr.map(item => {
+		return keys.reduce((obj, key) => {
+			return {
+				...obj,
+				[key]: getDecryptedString(item[key], masterKey)
+			}
+		}, {})
+	})
+};
+
+export const getPaoData = (data) => {
+	const [_, hash = '0'] = window.location.href.split('#');
+	const key = parseInt(hash);
+	return deCrypt(data, key);
+}
+
+
+// const en = (encrypt(paoData, koden));
+// console.log('enc', en);
+
+
 const majorSystemMap = {
 	'0': 'P',
 	'1': 'T',

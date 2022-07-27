@@ -1,11 +1,14 @@
 import { PaoTable } from './PaoTable';
-import { paoData } from '../myPao';
 import { ActionObjectTable } from './ActionObjectTable';
 import { ViewButtons } from './ViewButtons';
 import { TrainingView } from './TrainingView';
 import { useSelector } from 'react-redux';
 import { TrainingRange, TrainingRangeHardOnes, TrainingRangeNeutralOnes } from './TrainingRange';
 import { Stats } from './Stats';
+import { paoDataRaw } from '../paoData';
+import { getPaoData } from '../tools';
+// import { paoData } from '../myPao';
+const paoData = getPaoData(paoDataRaw);
 
 
 export const Main = () => {

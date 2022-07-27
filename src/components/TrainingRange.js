@@ -35,7 +35,7 @@ export const TrainingRangeNeutralOnes = ({ paoData }) => {
 	const isRandom = useSelector(state => state.isRandom);
 	const propName = useSelector(state => state.propName);
 
-	const items = useSelector(state => state.results.person
+	const items = useSelector(state => state.results[propName]
 		.map((item, index) => ({ ...item, index }))
 		.filter(({ index }) => index >= min && index < max)
 		.filter(({ ok, notOk }) => ok === notOk))
@@ -68,7 +68,7 @@ export const TrainingRangeHardOnes = ({ paoData }) => {
 	const isRandom = useSelector(state => state.isRandom);
 	const propName = useSelector(state => state.propName);
 
-	const items = useSelector(state => state.results.person
+	const items = useSelector(state => state.results[propName]
 		.map((item, index) => ({ ...item, index }))
 		.filter(({ index }) => index >= min && index < max)
 		.filter(({ ok, notOk }) => notOk > 0 && (notOk - ok) >= 1))
